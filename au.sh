@@ -20,3 +20,16 @@ mount --mkdir /dev/"$disk"1 /mnt/boot
 # Обновление зеркал
 reflector --country ru --age 24 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 pacman -Sy
+
+# Установка основных пакетов
+pacstrap -K /mnt base dhcpcd efibootmgr grub intel-ucode linux linux-firmware nano pacman sudo vi xf86-video-nouveau
+
+# Генерация Fstab
+genfstab -U /mnt >> /mnt/etc/fstab
+
+# Переход к корневому каталогу
+Arch-chroot /mnt
+
+# Часовой пояс
+ln -sf /usr/share/zoneinfo/Asia/Novosibirsk /etc/localtime
+hwclock --systohc
