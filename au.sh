@@ -33,3 +33,19 @@ arch-chroot /mnt
 # Часовой пояс
 ln -sf /usr/share/zoneinfo/Asia/Novosibirsk /etc/localtime
 hwclock --systohc
+
+# Локализация
+sed -i -e "/^#en_US.UTF-8/s/^#//" /etc/locale.gen
+sed -i -e "/^#ru_RU.UTF-8/s/^#//" /etc/locale.gen
+locale-gen
+echo LANG=ru_RU.UTF-8 > /etc/locale.conf
+echo FONT=Cyr_a8x16 > /etc/vconsole.conf
+echo KEYMAP=ruwin_alt_sh-UTF-8 >> /etc/vconsole
+
+# Настройка сети
+echo MS-7D17 > /etc/hostname
+systemctl enable dhcpcd.service
+
+mkinitcpio -P
+
+
