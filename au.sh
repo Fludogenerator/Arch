@@ -7,17 +7,15 @@ disk=$(lsblk -po "model,name" | grep -e HARD | cut -d'/' -f3)
 echo -en 'label:gpt\nsize=1024M,type=U\nsize=23552M,type=L\n' | sfdisk /dev/$disk
 echo -en 'label:mbr\nsize=1024M,type=L,bootable\nsize=23552M,type=L\n' | sfdisk /dev/$disk
 
+# Форматирование разделов
+mkfs.fat -F 32 /dev/"$disk"1
+mkfs.ext2 /dev/"$disk"1
+mkfs.ext4 /dev/"$disk"2
 
-
-
-
-
-
-
-
-
-
-
+# Монтирование разделов
+mount /dev/"$disk"2 /mnt
+mount --mkdir /dev/"$disk"1 /mnt/efi
+mount --mkdir /dev/"$disk"1 /mnt/boot
 
 # Обновление зеркал
 reflector --country ru --age 24 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
