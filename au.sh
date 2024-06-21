@@ -1,3 +1,4 @@
 #!/bin/bash
-echo Проверка Internet
-ping ya.ru
+
+# Определить букву диска
+disk=$(lsblk -po "model,name" | grep -e HARD | cut -d'/' -f3)
