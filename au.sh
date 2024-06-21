@@ -28,7 +28,7 @@ pacstrap -K /mnt base dhcpcd efibootmgr grub intel-ucode linux linux-firmware na
 genfstab -U /mnt >> /mnt/etc/fstab
 
 # Переход к корневому каталогу
-Arch-chroot /mnt
+arch-chroot /mnt
 
 # Часовой пояс
 ln -sf /usr/share/zoneinfo/Asia/Novosibirsk /etc/localtime
