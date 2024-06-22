@@ -4,8 +4,8 @@
 disk=$(lsblk -po "model,name" | grep -e HARD | cut -d'/' -f3)
 
 # Разметка диска (GPT/MBR)
-echo -en 'label:gpt\n,1024M,U\n,23552M,L\n' | sfdisk /dev/$disk
-echo -en 'label:mbr\n,1024M,L,*\n,23552M,L\n' | sfdisk /dev/$disk
+echo -e 'label:gpt\n,1024M,U\n,23552M,L\n' | sfdisk /dev/$disk
+echo -e 'label:mbr\n,1024M,L,*\n,23552M,L\n' | sfdisk /dev/$disk
 
 # Форматирование разделов
 mkfs.fat -F 32 /dev/"$disk"1
