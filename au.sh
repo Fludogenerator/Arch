@@ -8,9 +8,9 @@ echo -e 'label:gpt\n,1024M,U\n,23552M,L\n' | sfdisk /dev/$disk
 echo -e 'label:mbr\n,1024M,L,*\n,23552M,L\n' | sfdisk /dev/$disk
 
 # Форматирование разделов
-mkfs.fat -F 32 /dev/"$disk"1
-mkfs.ext2 /dev/"$disk"1
-mkfs.ext4 /dev/"$disk"2
+yes | mkfs.fat -F 32 /dev/"$disk"1
+yes | mkfs.ext2 /dev/"$disk"1
+yes | mkfs.ext4 /dev/"$disk"2
 
 # Монтирование разделов
 mount /dev/"$disk"2 /mnt
