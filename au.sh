@@ -40,10 +40,12 @@ sed -i -e "/#ru_RU.UTF-8/s/#//" /mnt/etc/locale.gen
 locale-gen
 echo LANG=ru_RU.UTF-8 > /mnt/etc/locale.conf
 echo FONT=Cyr_a8x16 > /mnt/etc/vconsole.conf
-echo KEYMAP=ruwin_alt_sh-UTF-8 >> /mnt/etc/vconsole
+echo KEYMAP=ruwin_alt_sh-UTF-8 >> /mnt/etc/vconsole.conf
 
 # Настройка сети
 echo MS-7D17 > /mnt/etc/hostname
 systemctl enable dhcpcd.service
 
 mkinitcpio -P
+
+# Пароль суперпользователя
